@@ -71,14 +71,14 @@ type moduleInfoReq struct {
 }
 
 type moduleInfoRes struct {
-	Name        string     `msgpack:"name"`
-	Description string     `msgpack:"description"`
-	License     string     `msgpack:"license"`
-	FilePath    string     `msgpack:"filepath"`
-	Version     string     `msgpack:"version"`
-	Rank        string     `msgpack:"rank"`
-	References  [][]string `msgpack:"references"`
-	Authors     []string   `msgpack:"authors"`
+	Name        string          `msgpack:"name"`
+	Description string          `msgpack:"description"`
+	License     string          `msgpack:"license"`
+	FilePath    string          `msgpack:"filepath"`
+	Version     string          `msgpack:"version"`
+	Rank        string          `msgpack:"rank"`
+	References  [][]interface{} `msgpack:"references"`
+	Authors     []string        `msgpack:"authors"`
 }
 
 type moduleOptionsReq struct {
@@ -159,9 +159,84 @@ type moduleExecuteRes struct {
 	JobId uint32 `msgpack:"job_id"`
 }
 
+type moduleCheckReq struct {
+	_msgpack   struct{} `msgpack:",asArray"`
+	Method     string
+	Token      string
+	ModuleType string
+	ModuleName string
+	Options    map[string]string
+}
+
+type moduleCheckRes struct {
+	JobId uint32 `msgpack:"job_id"`
+	UUID  string `msgpack:"uuid"`
+}
+
+type moduleResultsReq struct {
+	_msgpack struct{} `msgpack:",asArray"`
+	Method   string
+	Token    string
+	UUID     string
+}
+
+type moduleResultsRes struct {
+	Status string `msgpack:"status"`
+	Result *struct {
+		Code    string                 `msgpack:"code"`
+		Message string                 `msgpack:"message"`
+		Reason  *string                `msgpack:"reason"`
+		Details map[string]interface{} `msgpack:"details"`
+	} `msgpack:"result"`
+}
+
+type moduleAckReq struct {
+	_msgpack struct{} `msgpack:",asArray"`
+	Method   string
+	Token    string
+	UUID     string
+}
+
+type moduleAckRes struct {
+	Success bool `msgpack:"success"`
+}
+
+type moduleSourceRes struct {
+	Code    string `msgpack:"code"`
+	Check   bool   `msgpack:"check"`
+	Exploit bool   `msgpack:"exploit"`
+	Kind    string `msgpack:"kind"`
+}
+
 func (msf *Metasploit) ModuleExploits() (moduleExploitsRes, error) {
 	ctx := &moduleExploitsReq{
 		Method: "module.exploits",
+		Token:  msf.token,
+	}
+	var res moduleExploitsRes
+	if err := msf.send(ctx, &res); err != nil {
+		return moduleExploitsRes{}, err
+	}
+	return res, nil
+}
+
+func (msf *Metasploit) ModuleSource(moduleType, moduleName string) (moduleSourceRes, error) {
+	ctx := &moduleInfoReq{
+		Method:     "module.source",
+		Token:      msf.token,
+		ModuleType: moduleType,
+		ModuleName: moduleName,
+	}
+	var res moduleSourceRes
+	if err := msf.send(ctx, &res); err != nil {
+		return moduleSourceRes{}, err
+	}
+	return res, nil
+}
+
+func (msf *Metasploit) ModulePocs() (moduleExploitsRes, error) {
+	ctx := &moduleExploitsReq{
+		Method: "module.pocs",
 		Token:  msf.token,
 	}
 	var res moduleExploitsRes
