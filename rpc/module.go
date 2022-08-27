@@ -404,6 +404,47 @@ func (msf *Metasploit) ModuleExecute(moduleType, moduleName string, moduleOption
 	return res, nil
 }
 
+func (msf *Metasploit) ModuleCheck(moduleType, moduleName string, moduleOptions map[string]string) (moduleCheckRes, error) {
+	ctx := &moduleCheckReq{
+		Method:     "module.check",
+		Token:      msf.token,
+		ModuleType: moduleType,
+		ModuleName: moduleName,
+		Options:    moduleOptions,
+	}
+	var res moduleCheckRes
+	if err := msf.send(ctx, &res); err != nil {
+		return moduleCheckRes{}, err
+	}
+	return res, nil
+}
+
+func (msf *Metasploit) ModuleResults(uuid string) (moduleResultsRes, error) {
+	ctx := &moduleResultsReq{
+		Method: "module.results",
+		Token:  msf.token,
+		UUID:   uuid,
+	}
+	var res moduleResultsRes
+	if err := msf.send(ctx, &res); err != nil {
+		return moduleResultsRes{}, err
+	}
+	return res, nil
+}
+
+func (msf *Metasploit) ModuleAck(uuid string) (moduleAckRes, error) {
+	ctx := &moduleAckReq{
+		Method: "module.ack",
+		Token:  msf.token,
+		UUID:   uuid,
+	}
+	var res moduleAckRes
+	if err := msf.send(ctx, &res); err != nil {
+		return moduleAckRes{}, err
+	}
+	return res, nil
+}
+
 func (msf *Metasploit) GetModuleRequires(moduleType, moduleName string) ([]string, error) {
 	var returnValues []string
 
