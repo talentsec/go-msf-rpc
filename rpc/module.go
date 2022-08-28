@@ -152,7 +152,7 @@ type moduleExecuteReq struct {
 	Token      string
 	ModuleType string
 	ModuleName string
-	Options    map[string]string
+	Options    map[string]interface{}
 }
 
 type moduleExecuteRes struct {
@@ -165,7 +165,7 @@ type moduleCheckReq struct {
 	Token      string
 	ModuleType string
 	ModuleName string
-	Options    map[string]string
+	Options    map[string]interface{}
 }
 
 type moduleCheckRes struct {
@@ -389,7 +389,7 @@ func (msf *Metasploit) ModuleEncode(data, encoderModule string, moduleOptions ma
 	return res, nil
 }
 
-func (msf *Metasploit) ModuleExecute(moduleType, moduleName string, moduleOptions map[string]string) (moduleExecuteRes, error) {
+func (msf *Metasploit) ModuleExecute(moduleType, moduleName string, moduleOptions map[string]interface{}) (moduleExecuteRes, error) {
 	ctx := &moduleExecuteReq{
 		Method:     "module.execute",
 		Token:      msf.token,
@@ -404,7 +404,7 @@ func (msf *Metasploit) ModuleExecute(moduleType, moduleName string, moduleOption
 	return res, nil
 }
 
-func (msf *Metasploit) ModuleCheck(moduleType, moduleName string, moduleOptions map[string]string) (moduleCheckRes, error) {
+func (msf *Metasploit) ModuleCheck(moduleType, moduleName string, moduleOptions map[string]interface{}) (moduleCheckRes, error) {
 	ctx := &moduleCheckReq{
 		Method:     "module.check",
 		Token:      msf.token,
