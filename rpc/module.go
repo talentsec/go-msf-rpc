@@ -181,7 +181,8 @@ type ModuleResultsReq struct {
 }
 
 type ModuleResultsRes struct {
-	Status string `msgpack:"status"`
+	Status string  `msgpack:"status"`
+	Error  *string `msgpack:"error"`
 	Result *struct {
 		Code    string                 `msgpack:"code"`
 		Message string                 `msgpack:"message"`
