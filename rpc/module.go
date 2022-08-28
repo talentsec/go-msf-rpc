@@ -335,6 +335,34 @@ func (msf *Metasploit) ModuleOptions(moduleType, moduleName string) (ModuleOptio
 	return res, nil
 }
 
+func (msf *Metasploit) ModuleInfoHtml(moduleType, moduleName string) (string, error) {
+	ctx := &ModuleOptionsReq{
+		Method:     "module.info_html",
+		Token:      msf.token,
+		ModuleType: moduleType,
+		ModuleName: moduleName,
+	}
+	var res string
+	if err := msf.send(ctx, &res); err != nil {
+		return "", err
+	}
+	return res, nil
+}
+
+func (msf *Metasploit) ModuleDocumentation(moduleType, moduleName string) (string, error) {
+	ctx := &ModuleOptionsReq{
+		Method:     "module.documentation",
+		Token:      msf.token,
+		ModuleType: moduleType,
+		ModuleName: moduleName,
+	}
+	var res string
+	if err := msf.send(ctx, &res); err != nil {
+		return "", err
+	}
+	return res, nil
+}
+
 func (msf *Metasploit) ModuleCompatiblePayloads(moduleName string) (ModuleCompatiblePayloadsRes, error) {
 	ctx := &ModuleCompatiblePayloadsReq{
 		Method:     "module.compatible_payloads",
