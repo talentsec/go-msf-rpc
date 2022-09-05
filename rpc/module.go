@@ -71,14 +71,18 @@ type ModuleInfoReq struct {
 }
 
 type ModuleInfoRes struct {
-	Name        string          `msgpack:"name"`
-	Description string          `msgpack:"description"`
-	License     string          `msgpack:"license"`
-	FilePath    string          `msgpack:"filepath"`
-	Version     string          `msgpack:"version"`
-	Rank        string          `msgpack:"rank"`
-	References  [][]interface{} `msgpack:"references"`
-	Authors     []string        `msgpack:"authors"`
+	Name           string          `msgpack:"name"`
+	Description    string          `msgpack:"description"`
+	License        string          `msgpack:"license"`
+	FilePath       string          `msgpack:"filepath"`
+	Version        string          `msgpack:"version"`
+	Rank           string          `msgpack:"rank"`
+	References     [][]interface{} `msgpack:"references"`
+	Authors        []string        `msgpack:"authors"`
+	Arch           []string        `msgpack:"arch"`
+	Platform       []string        `msgpack:"platform"`
+	Privileged     bool            `msgpack:"privileged"`
+	DisclosureDate bool            `msgpack:"disclosure_date"`
 }
 
 type ModuleOptionsReq struct {
