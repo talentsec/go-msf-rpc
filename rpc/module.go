@@ -82,7 +82,7 @@ type ModuleInfoRes struct {
 	Arch           []string        `msgpack:"arch"`
 	Platform       []string        `msgpack:"platform"`
 	Privileged     bool            `msgpack:"privileged"`
-	DisclosureDate bool            `msgpack:"disclosure_date"`
+	DisclosureDate string          `msgpack:"disclosure_date"`
 }
 
 type ModuleOptionsReq struct {
