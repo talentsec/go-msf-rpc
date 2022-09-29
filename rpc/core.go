@@ -36,6 +36,7 @@ type coreReloadModulesReq struct {
 	_msgpack struct{} `msgpack:",asArray"`
 	Method   string
 	Token    string
+	Force    bool `msgpack:"force"`
 }
 
 type coreReloadModulesRes struct {
@@ -153,10 +154,11 @@ func (msf *Metasploit) CoreModuleStats() (coreModuleStatsRes, error) {
 	return res, nil
 }
 
-func (msf *Metasploit) CoreReloadModules() (coreReloadModulesRes, error) {
+func (msf *Metasploit) CoreReloadModules(force bool) (coreReloadModulesRes, error) {
 	ctx := &coreReloadModulesReq{
 		Method: "core.reload_modules",
 		Token:  msf.token,
+		Force:  force,
 	}
 
 	var res coreReloadModulesRes
