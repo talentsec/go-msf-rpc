@@ -83,7 +83,7 @@ type ModuleInfoRes struct {
 	Platform        []string        `msgpack:"platform"`
 	Privileged      bool            `msgpack:"privileged"`
 	DisclosureDate  string          `msgpack:"disclosure_date"`
-	Metric          *Metric         `msgpack:"metric"`
+	Metric          Metric          `msgpack:"metric"`
 	AffectedVersion *string         `msgpack:"affected_version"`
 	Suggestion      *string         `msgpack:"suggestion"`
 }
