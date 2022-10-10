@@ -98,7 +98,7 @@ type Metric struct {
 	Confidentiality string  `msgpack:"confidentiality"`
 	Integrity       string  `msgpack:"integrity"`
 	Harmness        string  `msgpack:"harmness"`
-	Scale           int64   `msgpack:"scale"`
+	Scale           *int64  `msgpack:"scale"`
 }
 
 type ModuleOptionsReq struct {
