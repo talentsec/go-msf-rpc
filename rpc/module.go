@@ -83,22 +83,22 @@ type ModuleInfoRes struct {
 	Platform        []string        `msgpack:"platform"`
 	Privileged      bool            `msgpack:"privileged"`
 	DisclosureDate  string          `msgpack:"disclosure_date"`
-	Metric          Metric          `msgpack:"metric"`
-	AffectedVersion string          `msgpack:"affected_version"`
-	Suggestion      string          `msgpack:"suggestion"`
+	Metric          *Metric         `msgpack:"metric"`
+	AffectedVersion *string         `msgpack:"affected_version"`
+	Suggestion      *string         `msgpack:"suggestion"`
 }
 type Metric struct {
-	Score           float64 `msgpack:"score"`
-	Vector          string  `msgpack:"vector"`
-	Complexity      string  `msgpack:"complexity"`
-	Privilege       string  `msgpack:"privilege"`
-	Scope           string  `msgpack:"scope"`
-	Maturity        string  `msgpack:"maturity"`
-	Remediation     string  `msgpack:"remediation"`
-	Confidentiality string  `msgpack:"confidentiality"`
-	Integrity       string  `msgpack:"integrity"`
-	Harmness        string  `msgpack:"harmness"`
-	Scale           *int64  `msgpack:"scale"`
+	Score           *float64 `msgpack:"score"`
+	Vector          *string  `msgpack:"vector"`
+	Complexity      *string  `msgpack:"complexity"`
+	Privilege       *string  `msgpack:"privilege"`
+	Scope           *string  `msgpack:"scope"`
+	Maturity        *string  `msgpack:"maturity"`
+	Remediation     *string  `msgpack:"remediation"`
+	Confidentiality *string  `msgpack:"confidentiality"`
+	Integrity       *string  `msgpack:"integrity"`
+	Harmness        *string  `msgpack:"harmness"`
+	Scale           *int64   `msgpack:"scale"`
 }
 
 type ModuleOptionsReq struct {
