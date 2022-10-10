@@ -34,7 +34,7 @@ func main() {
 		}
 	}
 
-	msf, err := rpc.New(host, user, pass)
+	msf, err := rpc.New(host, user, pass, false)
 	if err != nil {
 		log.Panicln(err)
 	}
