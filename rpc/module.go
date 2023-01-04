@@ -83,10 +83,18 @@ type ModuleInfoRes struct {
 	Platform        []string        `msgpack:"platform"`
 	Privileged      bool            `msgpack:"privileged"`
 	DisclosureDate  string          `msgpack:"disclosure_date"`
+	Finger          Finger          `msgpack:"finger"`
 	Metric          Metric          `msgpack:"metric"`
 	AffectedVersion *string         `msgpack:"affected_version"`
 	Suggestion      *string         `msgpack:"suggestion"`
 }
+
+type Finger struct {
+	Service  string `msgpack:"service"`
+	Version  string `msgpack:"version"`
+	Srvproto string `msgpack:"srvproto"`
+}
+
 type Metric struct {
 	Score           *float64 `msgpack:"score"`
 	Vector          *string  `msgpack:"vector"`
